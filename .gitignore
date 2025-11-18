@@ -1,0 +1,54 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# ---- Virtual Environment ----
+venv/
+env/
+.venv/
+myenv
+
+# ---- Environment Variables ----
+*.env
+.env.*
+!.env.example
+
+# ---- FastAPI / Uvicorn ----
+*.sqlite3
+instance/
+*.db
+
+# ---- IDE Files ----
+.vscode/
+.idea/
+*.swp
+
+# ---- pytest ----
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---- mypy ----
+.mypy_cache/
+
+# ---- Docker ----
+# (keep Dockerfile and docker-compose, ignore build data)
+**/__pycache__/
+*.tar
+*.pid
+
+# ---- Cache / Temp ----
+dist/
+build/
+.cache/
+tmp/
+logs/
+
+# ---- Node (if using frontend in same folder) ----
+node_modules/
