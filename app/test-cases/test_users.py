@@ -17,15 +17,15 @@ def client():
     return TestClient(app)
 
 def test_users(client):
-    response=client.get("/test/Test User")
+    response=client.get("/test/Test")
 
     db=FakeDB()
     data=db.get_users()
     data.append({
         'id':'1',
-        'name':'Test User'
+        'name':'Test'
     })
 
     assert response.status_code == 200
-    assert response.json()["name"] == "Test User"
+    assert response.json()["name"] == "Test"
 
