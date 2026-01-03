@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from sqlalchemy import create_engine, String, Integer
-from sqlalchemy.orm import sessionmaker, declarative_base, Mapped, mapped_column
+from sqlalchemy import create_engine, String, Integer,select
+from sqlalchemy.orm import sessionmaker, declarative_base, Mapped, mapped_column,load_only
 from dotenv import load_dotenv
 import os
 
@@ -32,9 +32,13 @@ async def test_save(name: str):
         db.add(new_row)
         db.commit()
         db.refresh(new_row)
-        return {"id": new_row.id, "name": new_row.name}
+        return {"name": new_row.name}
     except Exception:
         db.rollback()
         raise
     finally:
         db.close()
+
+
+
+        

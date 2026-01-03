@@ -16,7 +16,7 @@ if config.config_file_name:
     fileConfig(config.config_file_name)
 
 # Import Base (all your models must be imported somewhere)
-from demo import Base
+from app.main.demo import Base
 
 # Metadata for autogenerate
 target_metadata = Base.metadata
