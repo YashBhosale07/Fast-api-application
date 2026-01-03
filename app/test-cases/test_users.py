@@ -1,10 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from demo import app
-from demo import SessionLocal
 
-
-db=SessionLocal()
 
 
 class FakeDB:
