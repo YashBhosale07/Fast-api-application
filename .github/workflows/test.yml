@@ -19,6 +19,7 @@ jobs:
   deploy-staging:
     needs: test
     runs-on: ubuntu-latest
+    environment: staging
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
