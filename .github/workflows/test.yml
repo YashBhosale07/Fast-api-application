@@ -21,31 +21,29 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    - name: Debug SSH key shape
-    run: |
-      echo "Checking key format..."
-      if [[ "${{ secrets.STAGING_KEY }}" == *"BEGIN OPENSSH PRIVATE KEY"* ]]; then
-        echo "✅ OpenSSH private key detected"
-      elif [[ "${{ secrets.STAGING_KEY }}" == *"BEGIN RSA PRIVATE KEY"* ]]; then
-        echo "✅ RSA private key detected"
-      else
-        echo "❌ NOT a private SSH key"
-        exit 1
-      fi
 
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to Staging via SSH
+
+      - name: Debug SSH key shape
+        run: |
+          echo "Checking key format..."
+          if [[ "${{ secrets.STAGING_KEY }}" == *"BEGIN OPENSSH PRIVATE KEY"* ]]; then
+            echo "✅ OpenSSH private key detected"
+          elif [[ "${{ secrets.STAGING_KEY }}" == *"BEGIN RSA PRIVATE KEY"* ]]; then
+            echo "✅ RSA private key detected"
+          else
+            echo "❌ NOT a private SSH key"
+            exit 1
+          fi
+
+      - name: SSH minimal test
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
           key: ${{ secrets.STAGING_KEY }}
           port: 22
-          timeout: 30s
-          command_timeout: 10m
           script: |
-            cd /test-application
-            git pull origin master
-            sudo systemctl restart test-application
-
+            whoami
+            hostname
