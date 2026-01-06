@@ -4,6 +4,9 @@ on:
   push:
     branches: ["master"]
 
+  pull_request:
+    branches: ["master"]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,6 +28,30 @@ jobs:
       - name: Run tests
         run: |
           pytest app/test-cases -v
+
+  deploy-stagging:
+    needs: test
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@4
+
+      - name: Deploy to Staging via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            cd ${{ secrets.STAGING_APP_DIR }}
+            cd test-application
+            git pull origin master
+            sudo systemctl restart test-application
+
+
       
     
   
