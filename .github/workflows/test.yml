@@ -34,7 +34,7 @@ jobs:
           timeout: 30s
           command_timeout: 10m
           script: |
-            cd /test-application
+            cd /home/ubuntu/test-application
             git pull origin master
             sudo systemctl restart test-application
 
