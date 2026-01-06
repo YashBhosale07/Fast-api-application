@@ -26,9 +26,9 @@ jobs:
       - name: Deploy to Staging via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ env.STAGING_HOST }}
-          username: ${{ env.STAGING_USER }}
-          key: ${{ env.STAGING_SSH_KEY }}
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
           port: 22
           timeout: 30s
           command_timeout: 10m
