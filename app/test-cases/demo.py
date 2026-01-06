@@ -39,6 +39,13 @@ async def test_save(name: str):
     finally:
         db.close()
 
+@app.get("/check")
+async def health_check_up():
+    return {
+        "health":"ok"
+    }
+
+
 
 
         
