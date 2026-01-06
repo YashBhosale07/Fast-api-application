@@ -28,7 +28,7 @@ jobs:
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USER }}
-          key: ${{ secrets.STAGING_SSH_KEY }}
+          key: ${{ secrets.STAGING_KEY }}
           port: 22
           timeout: 30s
           command_timeout: 10m
